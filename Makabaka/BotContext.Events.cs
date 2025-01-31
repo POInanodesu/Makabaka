@@ -177,7 +177,19 @@ namespace Makabaka
 			await OnGroupReaction.Invoke(sender, e);
 		}
 
-		public event EventHandlerAsync<GroupLuckyKingEventArgs>? OnGroupLuckyKing;
+        public event EventHandlerAsync<GroupCardChangeEventArgs>? OnGroupCardChange;
+
+        async Task IBotContext.InvokeOnGroupCardChange(object sender, GroupCardChangeEventArgs e)
+        {
+            if (OnGroupCardChange == null)
+            {
+                return;
+            }
+
+            await OnGroupCardChange.Invoke(sender, e);
+        }
+
+        public event EventHandlerAsync<GroupLuckyKingEventArgs>? OnGroupLuckyKing;
 
 		async Task IBotContext.InvokeOnGroupLuckyKing(object sender, GroupLuckyKingEventArgs e)
 		{

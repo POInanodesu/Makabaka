@@ -10,14 +10,14 @@
 		/// ✔ 收<br/>
 		/// ✔ 发
 		/// </summary>
-		public MusicType Type { get; set; }
+		public string Type { get; set; } = string.Empty;
 
-		/// <summary>
-		/// (<see cref="Type"/> != "custom") 歌曲 ID<br/>
-		/// ✔ 收<br/>
-		/// ✔ 发
-		/// </summary>
-		public string Id { get; set; } = string.Empty;
+        /// <summary>
+        /// (<see cref="Type"/> != "custom") 歌曲 ID<br/>
+        /// ✔ 收<br/>
+        /// ✔ 发
+        /// </summary>
+        public string Id { get; set; } = string.Empty;
 
 		/// <summary>
 		/// (<see cref="Type"/> == "custom") 点击后跳转目标 URL<br/>

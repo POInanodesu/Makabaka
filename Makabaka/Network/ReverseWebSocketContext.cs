@@ -88,16 +88,16 @@ namespace Makabaka.Network
 			var node = JsonSerializer.Deserialize<JsonNode>(data);
 			if (node == null)
 			{
-				logger.LogError(SR.MessageDeserializeFailed);
-				return;
+                logger.LogError($"MessageReceived\r\n{SR.MessageDeserializeFailed}\r\n{data}");
+                return;
 			}
 
 			logger.LogTrace(SR.ReverseWebSocketReceived, e.Client.IpPort, data);
 
 			if (!await TryProcessAsync(node))
 			{
-				logger.LogError(SR.MessageProcessedFailed);
-			}
+                logger.LogError($"MessageReceived\r\n{SR.MessageProcessedFailed}\r\n{data}");
+            }
 		}
 
 		private string Authorization => $"Bearer {AccessToken}";

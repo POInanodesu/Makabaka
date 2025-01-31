@@ -128,5 +128,10 @@ namespace Makabaka.Messages
 		/// Markdown 消息
 		/// </summary>
 		Markdown,
-	}
+
+        /// <summary>
+        /// 文件
+        /// </summary>
+        File,
+    }
 }

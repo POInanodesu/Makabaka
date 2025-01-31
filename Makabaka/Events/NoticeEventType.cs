@@ -54,5 +54,10 @@
 		/// 群表情回应
 		/// </summary>
 		Reaction,
-	}
+
+        /// <summary>
+        /// 群名片更改
+        /// </summary>
+        GroupCard,
+    }
 }

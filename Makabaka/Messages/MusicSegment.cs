@@ -7,7 +7,7 @@ namespace Makabaka.Messages
 	/// </summary>
 	[Segment(SegmentType.Music)]
 	public class MusicSegment(
-		MusicType type,
+		string type,
 		string id
 		) : Segment<MusicData>(
 			SegmentType.Music.ToSerializedString(),
@@ -20,7 +20,7 @@ namespace Makabaka.Messages
 		/// <summary>
 		/// 反序列化保留，请使用其它构造函数
 		/// </summary>
-		public MusicSegment() : this(default, string.Empty)
+		public MusicSegment() : this("qq", string.Empty)
 		{
 		}
 	}

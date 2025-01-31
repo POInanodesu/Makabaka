@@ -106,10 +106,17 @@ namespace Makabaka
 
 		internal Task InvokeOnGroupReaction(object sender, ReactionEventArgs e);
 
-		/// <summary>
-		/// 当群红包运气王事件发生时触发
-		/// </summary>
-		event EventHandlerAsync<GroupLuckyKingEventArgs>? OnGroupLuckyKing;
+        /// <summary>
+        /// 当群名片变动事件发生时触发
+        /// </summary>
+        event EventHandlerAsync<GroupCardChangeEventArgs>? OnGroupCardChange;
+
+        internal Task InvokeOnGroupCardChange(object sender, GroupCardChangeEventArgs e);
+
+        /// <summary>
+        /// 当群红包运气王事件发生时触发
+        /// </summary>
+        event EventHandlerAsync<GroupLuckyKingEventArgs>? OnGroupLuckyKing;
 
 		internal Task InvokeOnGroupLuckyKing(object sender, GroupLuckyKingEventArgs e);
 

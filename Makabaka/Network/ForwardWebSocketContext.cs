@@ -50,15 +50,15 @@ namespace Makabaka.Network
 			var node = JsonSerializer.Deserialize<JsonNode>(data);
 			if (node == null)
 			{
-				logger.LogError(SR.MessageDeserializeFailed);
+				logger.LogError($"MessageReceived\r\n{SR.MessageDeserializeFailed}\r\n{data}");
 				return;
 			}
 
 			logger.LogTrace(SR.ForwardWebSocketReceived, data);
 
 			if (!await TryProcessAsync(node))
-			{
-				logger.LogError(SR.MessageProcessedFailed);
+            {
+                logger.LogError($"MessageReceived\r\n{SR.MessageProcessedFailed}\r\n{data}");
 			}
 		}
 

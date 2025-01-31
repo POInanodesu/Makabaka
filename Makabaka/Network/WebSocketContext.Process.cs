@@ -29,7 +29,7 @@ namespace Makabaka.Network
 			}
 			catch (Exception e)
 			{
-				_logger.LogError(e, SR.MessageHandleError);
+				_logger.LogError(e,$"{SR.MessageHandleError}\r\n{node.ToJsonString()}");
 			}
 			return true;
 		}
@@ -50,9 +50,9 @@ namespace Makabaka.Network
 				await botContext.InvokeOnHeartbeat(this, info);
 			}
 			catch (Exception e)
-			{
-				_logger.LogError(e, SR.MessageHandleError);
-			}
+            {
+                _logger.LogError(e, $"{SR.MessageHandleError}\r\n{node.ToJsonString()}");
+            }
 			return true;
 		}
 
@@ -74,9 +74,9 @@ namespace Makabaka.Network
 				await botContext.InvokeOnPrivateMessage(this, info);
 			}
 			catch (Exception e)
-			{
-				_logger.LogError(e, SR.MessageHandleError);
-			}
+            {
+                _logger.LogError(e, $"{SR.MessageHandleError}\r\n{node.ToJsonString()}");
+            }
 			return true;
 		}
 
@@ -98,9 +98,9 @@ namespace Makabaka.Network
 				await botContext.InvokeOnGroupMessage(this, info);
 			}
 			catch (Exception e)
-			{
-				_logger.LogError(e, SR.MessageHandleError);
-			}
+            {
+                _logger.LogError(e, $"{SR.MessageHandleError}\r\n{node.ToJsonString()}");
+            }
 			return true;
 		}
 
@@ -120,9 +120,9 @@ namespace Makabaka.Network
 				await botContext.InvokeOnGroupFileUploadMessage(this, info);
 			}
 			catch (Exception e)
-			{
-				_logger.LogError(e, SR.MessageHandleError);
-			}
+            {
+                _logger.LogError(e, $"{SR.MessageHandleError}\r\n{node.ToJsonString()}");
+            }
 			return true;
 		}
 
@@ -142,9 +142,9 @@ namespace Makabaka.Network
 				await botContext.InvokeOnGroupAdminChange(this, info);
 			}
 			catch (Exception e)
-			{
-				_logger.LogError(e, SR.MessageHandleError);
-			}
+            {
+                _logger.LogError(e, $"{SR.MessageHandleError}\r\n{node.ToJsonString()}");
+            }
 			return true;
 		}
 
@@ -164,9 +164,9 @@ namespace Makabaka.Network
 				await botContext.InvokeOnGroupMemberDecrease(this, info);
 			}
 			catch (Exception e)
-			{
-				_logger.LogError(e, SR.MessageHandleError);
-			}
+            {
+                _logger.LogError(e, $"{SR.MessageHandleError}\r\n{node.ToJsonString()}");
+            }
 			return true;
 		}
 
@@ -186,9 +186,9 @@ namespace Makabaka.Network
 				await botContext.InvokeOnGroupMemberIncrease(this, info);
 			}
 			catch (Exception e)
-			{
-				_logger.LogError(e, SR.MessageHandleError);
-			}
+            {
+                _logger.LogError(e, $"{SR.MessageHandleError}\r\n{node.ToJsonString()}");
+            }
 			return true;
 		}
 
@@ -208,9 +208,9 @@ namespace Makabaka.Network
 				await botContext.InvokeOnGroupMemberMute(this, info);
 			}
 			catch (Exception e)
-			{
-				_logger.LogError(e, SR.MessageHandleError);
-			}
+            {
+                _logger.LogError(e, $"{SR.MessageHandleError}\r\n{node.ToJsonString()}");
+            }
 			return true;
 		}
 
@@ -230,9 +230,9 @@ namespace Makabaka.Network
 				await botContext.InvokeOnFriendAdd(this, info);
 			}
 			catch (Exception e)
-			{
-				_logger.LogError(e, SR.MessageHandleError);
-			}
+            {
+                _logger.LogError(e, $"{SR.MessageHandleError}\r\n{node.ToJsonString()}");
+            }
 			return true;
 		}
 
@@ -252,9 +252,9 @@ namespace Makabaka.Network
 				await botContext.InvokeOnGroupMessageWithdraw(this, info);
 			}
 			catch (Exception e)
-			{
-				_logger.LogError(e, SR.MessageHandleError);
-			}
+            {
+                _logger.LogError(e, $"{SR.MessageHandleError}\r\n{node.ToJsonString()}");
+            }
 			return true;
 		}
 
@@ -274,9 +274,9 @@ namespace Makabaka.Network
 				await botContext.InvokeOnFriendMessageWithdraw(this, info);
 			}
 			catch (Exception e)
-			{
-				_logger.LogError(e, SR.MessageHandleError);
-			}
+            {
+                _logger.LogError(e, $"{SR.MessageHandleError}\r\n{node.ToJsonString()}");
+            }
 			return true;
 		}
 
@@ -296,13 +296,35 @@ namespace Makabaka.Network
 				await botContext.InvokeOnGroupReaction(this, info);
 			}
 			catch (Exception e)
-			{
-				_logger.LogError(e, SR.MessageHandleError);
-			}
+            {
+                _logger.LogError(e, $"{SR.MessageHandleError}\r\n{node.ToJsonString()}");
+            }
 			return true;
 		}
 
-		[Notify(NotifyEventType.Poke)]
+        [Notice(NoticeEventType.GroupCard)]
+        private async Task<bool> ProcessGroupCardChangeAsync(JsonNode node)
+        {
+            try
+            {
+                var info = node.Deserialize<GroupCardChangeEventArgs>(_jsonSerializerOptions);
+                if (info == null)
+                {
+                    _logger.LogError(SR.MessageDeserializeAsFailed, nameof(GroupCardChangeEventArgs));
+                    return false;
+                }
+
+                info.Context = botContext;
+                await botContext.InvokeOnGroupCardChange(this, info);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"{SR.MessageHandleError}\r\n{node.ToJsonString()}");
+            }
+            return true;
+        }
+
+        [Notify(NotifyEventType.Poke)]
 		private async Task<bool> ProcessGroupPokeAsync(JsonNode node)
 		{
 			try
@@ -318,9 +340,9 @@ namespace Makabaka.Network
 				await botContext.InvokeOnGroupPoke(this, info);
 			}
 			catch (Exception e)
-			{
-				_logger.LogError(e, SR.MessageHandleError);
-			}
+            {
+                _logger.LogError(e, $"{SR.MessageHandleError}\r\n{node.ToJsonString()}");
+            }
 			return true;
 		}
 
@@ -340,9 +362,9 @@ namespace Makabaka.Network
 				await botContext.InvokeOnGroupLuckyKing(this, info);
 			}
 			catch (Exception e)
-			{
-				_logger.LogError(e, SR.MessageHandleError);
-			}
+            {
+                _logger.LogError(e, $"{SR.MessageHandleError}\r\n{node.ToJsonString()}");
+            }
 			return true;
 		}
 
@@ -362,9 +384,9 @@ namespace Makabaka.Network
 				await botContext.InvokeOnGroupMemberHonorChange(this, info);
 			}
 			catch (Exception e)
-			{
-				_logger.LogError(e, SR.MessageHandleError);
-			}
+            {
+                _logger.LogError(e, $"{SR.MessageHandleError}\r\n{node.ToJsonString()}");
+            }
 			return true;
 		}
 
@@ -384,9 +406,9 @@ namespace Makabaka.Network
 				await botContext.InvokeOnInputStatus(this, info);
 			}
 			catch (Exception e)
-			{
-				_logger.LogError(e, SR.MessageHandleError);
-			}
+            {
+                _logger.LogError(e, $"{SR.MessageHandleError}\r\n{node.ToJsonString()}");
+            }
 			return true;
 		}
 
@@ -406,9 +428,9 @@ namespace Makabaka.Network
 				await botContext.InvokeOnFriendAddRequest(this, info);
 			}
 			catch (Exception e)
-			{
-				_logger.LogError(e, SR.MessageHandleError);
-			}
+            {
+                _logger.LogError(e, $"{SR.MessageHandleError}\r\n{node.ToJsonString()}");
+            }
 			return true;
 		}
 
@@ -428,9 +450,9 @@ namespace Makabaka.Network
 				await botContext.InvokeOnGroupAddRequest(this, info);
 			}
 			catch (Exception e)
-			{
-				_logger.LogError(e, SR.MessageHandleError);
-			}
+            {
+                _logger.LogError(e, $"{SR.MessageHandleError}\r\n{node.ToJsonString()}");
+            }
 			return true;
 		}
 
@@ -458,9 +480,9 @@ namespace Makabaka.Network
 				apiContext.ResponseTaskCompletionSource.SetResult((APIResponse)response);
 			}
 			catch (Exception e)
-			{
-				_logger.LogError(e, SR.MessageHandleError);
-			}
+            {
+                _logger.LogError(e, $"{SR.MessageHandleError}\r\n{node.ToJsonString()}");
+            }
 			return Task.FromResult(true);
 		}
 	}

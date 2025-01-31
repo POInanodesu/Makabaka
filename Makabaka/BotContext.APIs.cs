@@ -579,7 +579,19 @@ namespace Makabaka
 				);
 		}
 
-		public Task<APIResponse<GroupFilesInfo>> GetGroupFilesByFolderAsync(
+        public Task<APIResponse<FileInfo>> GetFileAsync(
+			string fileId,
+            CancellationToken cancellationToken = default
+            )
+        {
+            return ExecuteAPIAsync<GetFileRequestParams, FileInfo>(
+                "get_file",
+                new(fileId),
+                cancellationToken
+                );
+        }
+
+        public Task<APIResponse<GroupFilesInfo>> GetGroupFilesByFolderAsync(
 			ulong groupId,
 			string? folderId = null,
 			CancellationToken cancellationToken = default

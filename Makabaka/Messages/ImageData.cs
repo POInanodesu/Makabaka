@@ -19,12 +19,12 @@ namespace Makabaka.Messages
 		public string File { get; set; } = string.Empty;
 
 		/// <summary>
-		/// [Lagrange拓展] 图片文件名<br/>
+		/// 图片文件名<br/>
 		/// ✔ 收<br/>
 		/// ✘ 发
 		/// 例如：123.jpg
 		/// </summary>
-		public string? Filename { get; set; }
+		public string? Name { get; set; }
 
 		/// <summary>
 		/// 图片 URL<br/>
@@ -42,11 +42,34 @@ namespace Makabaka.Messages
 		public string Summary { get; set; } = string.Empty;
 
 		/// <summary>
-		/// [Lagrange拓展] 图片子类型
+		/// 图片子类型
 		/// ✔ 收<br/>
 		/// ✔ 发
 		/// </summary>
-		[JsonPropertyName("subType")]
 		public int SubType { get; set; }
-	}
+        /// <summary>
+        /// 文件 ID<br/>
+		/// ✔ 收<br/>
+		/// ✘ 发
+        /// </summary>
+        public string? FileId { get; set; }
+        /// <summary>
+        /// 文件路径<br/>
+        /// ✔ 收<br/>
+        /// ✘ 发
+        /// </summary>
+        public string? Path { get; set; }
+        /// <summary>
+        /// 文件大小<br/>
+        /// ✔ 收<br/>
+        /// ✘ 发
+        /// </summary>
+        public string? FileSize { get; set; }
+        /// <summary>
+        /// 文件唯一标识<br/>
+		/// ✔ 收<br/>
+		/// ✘ 发
+        /// </summary>
+        public string? FileUnique { get; set; }
+    }
 }

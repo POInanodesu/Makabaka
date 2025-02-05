@@ -8,9 +8,13 @@ namespace Makabaka.Messages
 	public enum SegmentType
 	{
 		/// <summary>
-		/// 不支持
+		/// 未定义
 		/// </summary>
-		Unsupported,
+        Undefined,
+        /// <summary>
+        /// 不支持
+        /// </summary>
+        Unsupported,
 
 		/// <summary>
 		/// 文本

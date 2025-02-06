@@ -324,6 +324,28 @@ namespace Makabaka.Network
             return true;
         }
 
+        [Notice(NoticeEventType.Essence)]
+        private async Task<bool> ProcessGroupEssenceAsync(JsonNode node)
+        {
+            try
+            {
+                var info = node.Deserialize<GroupEssenceChangeEventArgs>(_jsonSerializerOptions);
+                if (info == null)
+                {
+                    _logger.LogError(SR.MessageDeserializeAsFailed, nameof(GroupEssenceChangeEventArgs));
+                    return false;
+                }
+
+                info.Context = botContext;
+                await botContext.InvokeOnGroupEssenceChange(this, info);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"{SR.MessageHandleError}\r\n{node.ToJsonString()}");
+            }
+            return true;
+        }
+
         [Notify(NotifyEventType.Poke)]
 		private async Task<bool> ProcessGroupPokeAsync(JsonNode node)
 		{

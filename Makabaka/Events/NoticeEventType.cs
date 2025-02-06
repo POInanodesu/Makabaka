@@ -59,5 +59,10 @@
         /// 群名片更改
         /// </summary>
         GroupCard,
+
+		/// <summary>
+		/// 群设置精华消息
+		/// </summary>
+        Essence,
     }
 }

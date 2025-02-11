@@ -24,5 +24,10 @@
 		/// 输入状态
 		/// </summary>
 		InputStatus,
-	}
+
+		/// <summary>
+		/// 点赞
+		/// </summary>
+        ProfileLike,
+    }
 }

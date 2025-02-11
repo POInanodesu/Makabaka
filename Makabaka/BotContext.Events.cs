@@ -235,9 +235,21 @@ namespace Makabaka
 			}
 
 			await OnInputStatus.Invoke(sender, e);
-		}
+        }
 
-		public event EventHandlerAsync<FriendAddRequestEventArgs>? OnFriendAddRequest;
+        public event EventHandlerAsync<ProfileLikeEventArgs>? OnProfileLike;
+
+        async Task IBotContext.InvokeOnProfileLike(object sender, ProfileLikeEventArgs e)
+        {
+            if (OnProfileLike == null)
+            {
+                return;
+            }
+
+            await OnProfileLike.Invoke(sender, e);
+        }
+
+        public event EventHandlerAsync<FriendAddRequestEventArgs>? OnFriendAddRequest;
 
 		async Task IBotContext.InvokeOnFriendAddRequest(object sender, FriendAddRequestEventArgs e)
 		{

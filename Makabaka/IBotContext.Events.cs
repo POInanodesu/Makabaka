@@ -141,10 +141,17 @@ namespace Makabaka
 
 		internal Task InvokeOnInputStatus(object sender, InputStatusEventArgs e);
 
-		/// <summary>
-		/// 当加好友请求事件发生时触发
-		/// </summary>
-		event EventHandlerAsync<FriendAddRequestEventArgs>? OnFriendAddRequest;
+        /// <summary>
+        /// [NapCatQQ] 当点赞事件发生时触发
+        /// </summary>
+        event EventHandlerAsync<ProfileLikeEventArgs>? OnProfileLike;
+
+        internal Task InvokeOnProfileLike(object sender, ProfileLikeEventArgs e);
+
+        /// <summary>
+        /// 当加好友请求事件发生时触发
+        /// </summary>
+        event EventHandlerAsync<FriendAddRequestEventArgs>? OnFriendAddRequest;
 
 		internal Task InvokeOnFriendAddRequest(object sender, FriendAddRequestEventArgs e);
 

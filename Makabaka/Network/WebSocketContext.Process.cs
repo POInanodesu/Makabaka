@@ -432,9 +432,31 @@ namespace Makabaka.Network
                 _logger.LogError(e, $"{SR.MessageHandleError}\r\n{node.ToJsonString()}");
             }
 			return true;
-		}
+        }
 
-		[Request(RequestEventType.Friend)]
+        [Notify(NotifyEventType.ProfileLike)]
+        private async Task<bool> ProcessProfileLikeAsync(JsonNode node)
+        {
+            try
+            {
+                var info = node.Deserialize<ProfileLikeEventArgs>(_jsonSerializerOptions);
+                if (info == null)
+                {
+                    _logger.LogError(SR.MessageDeserializeAsFailed, nameof(ProfileLikeEventArgs));
+                    return false;
+                }
+
+                info.Context = botContext;
+                await botContext.InvokeOnProfileLike(this, info);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"{SR.MessageHandleError}\r\n{node.ToJsonString()}");
+            }
+            return true;
+        }
+
+        [Request(RequestEventType.Friend)]
 		private async Task<bool> ProcessFriendAddRequestAsync(JsonNode node)
 		{
 			try

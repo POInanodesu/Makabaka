@@ -149,6 +149,13 @@ namespace Makabaka
         internal Task InvokeOnProfileLike(object sender, ProfileLikeEventArgs e);
 
         /// <summary>
+        /// [NapCatQQ] 当群成员头衔变更事件发生时触发
+        /// </summary>
+        event EventHandlerAsync<GroupMemberTtitleChangeEventArgs>? OnGroupMemberTtitleChange;
+
+        internal Task InvokeOnGroupMemberTtitleChange(object sender, GroupMemberTtitleChangeEventArgs e);
+
+        /// <summary>
         /// 当加好友请求事件发生时触发
         /// </summary>
         event EventHandlerAsync<FriendAddRequestEventArgs>? OnFriendAddRequest;

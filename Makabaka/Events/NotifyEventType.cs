@@ -29,5 +29,10 @@
 		/// 点赞
 		/// </summary>
         ProfileLike,
+
+        /// <summary>
+        /// 群成员头衔变更
+        /// </summary>
+        Ttitle,
     }
 }

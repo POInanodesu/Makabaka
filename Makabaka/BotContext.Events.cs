@@ -249,6 +249,18 @@ namespace Makabaka
             await OnProfileLike.Invoke(sender, e);
         }
 
+        public event EventHandlerAsync<GroupMemberTtitleChangeEventArgs>? OnGroupMemberTtitleChange;
+
+        async Task IBotContext.InvokeOnGroupMemberTtitleChange(object sender, GroupMemberTtitleChangeEventArgs e)
+        {
+            if (OnGroupMemberTtitleChange == null)
+            {
+                return;
+            }
+
+            await OnGroupMemberTtitleChange.Invoke(sender, e);
+        }
+
         public event EventHandlerAsync<FriendAddRequestEventArgs>? OnFriendAddRequest;
 
 		async Task IBotContext.InvokeOnFriendAddRequest(object sender, FriendAddRequestEventArgs e)

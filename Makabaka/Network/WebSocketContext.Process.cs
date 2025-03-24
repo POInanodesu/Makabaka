@@ -456,20 +456,42 @@ namespace Makabaka.Network
             return true;
         }
 
-        [Notify(NotifyEventType.Ttitle)]
-        private async Task<bool> ProcessTtitleAsync(JsonNode node)
+        [Notify(NotifyEventType.Title)]
+        private async Task<bool> ProcessTitleAsync(JsonNode node)
         {
             try
             {
-                var info = node.Deserialize<GroupMemberTtitleChangeEventArgs>(_jsonSerializerOptions);
+                var info = node.Deserialize<GroupMemberTitleChangeEventArgs>(_jsonSerializerOptions);
                 if (info == null)
                 {
-                    _logger.LogError(SR.MessageDeserializeAsFailed, nameof(GroupMemberTtitleChangeEventArgs));
+                    _logger.LogError(SR.MessageDeserializeAsFailed, nameof(GroupMemberTitleChangeEventArgs));
                     return false;
                 }
 
                 info.Context = botContext;
-                await botContext.InvokeOnGroupMemberTtitleChange(this, info);
+                await botContext.InvokeOnGroupMemberTitleChange(this, info);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"{SR.MessageHandleError}\r\n{node.ToJsonString()}");
+            }
+            return true;
+        }
+
+        [Notify(NotifyEventType.GroupName)]
+        private async Task<bool> ProcessGroupNameAsync(JsonNode node)
+        {
+            try
+            {
+                var info = node.Deserialize<GroupNameChangeEventArgs>(_jsonSerializerOptions);
+                if (info == null)
+                {
+                    _logger.LogError(SR.MessageDeserializeAsFailed, nameof(GroupNameChangeEventArgs));
+                    return false;
+                }
+
+                info.Context = botContext;
+                await botContext.InvokeOnGroupNameChange(this, info);
             }
             catch (Exception e)
             {

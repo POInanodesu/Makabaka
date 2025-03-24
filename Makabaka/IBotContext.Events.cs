@@ -151,9 +151,16 @@ namespace Makabaka
         /// <summary>
         /// [NapCatQQ] 当群成员头衔变更事件发生时触发
         /// </summary>
-        event EventHandlerAsync<GroupMemberTtitleChangeEventArgs>? OnGroupMemberTtitleChange;
+        event EventHandlerAsync<GroupMemberTitleChangeEventArgs>? OnGroupMemberTitleChange;
 
-        internal Task InvokeOnGroupMemberTtitleChange(object sender, GroupMemberTtitleChangeEventArgs e);
+        internal Task InvokeOnGroupMemberTitleChange(object sender, GroupMemberTitleChangeEventArgs e);
+
+        /// <summary>
+        /// [NapCatQQ] 当群名称变更事件发生时触发
+        /// </summary>
+        event EventHandlerAsync<GroupNameChangeEventArgs>? OnGroupNameChange;
+
+        internal Task InvokeOnGroupNameChange(object sender, GroupNameChangeEventArgs e);
 
         /// <summary>
         /// 当加好友请求事件发生时触发

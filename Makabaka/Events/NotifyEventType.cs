@@ -33,6 +33,11 @@
         /// <summary>
         /// 群成员头衔变更
         /// </summary>
-        Ttitle,
+        Title,
+
+        /// <summary>
+        /// 群名称变更
+        /// </summary>
+        GroupName,
     }
 }

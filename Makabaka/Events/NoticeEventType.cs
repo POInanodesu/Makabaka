@@ -64,5 +64,10 @@
 		/// 群设置精华消息
 		/// </summary>
         Essence,
+
+        /// <summary>
+        /// 群消息表情点赞
+        /// </summary>
+        GroupMsgEmojiLike,
     }
 }

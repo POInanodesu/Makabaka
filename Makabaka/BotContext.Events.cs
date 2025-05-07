@@ -201,6 +201,18 @@ namespace Makabaka
             await OnGroupEssenceChange.Invoke(sender, e);
         }
 
+        public event EventHandlerAsync<GroupMsgEmojiLikeEventArgs>? OnGroupMsgEmojiLike;
+
+        async Task IBotContext.InvokeOnGroupMsgEmojiLike(object sender, GroupMsgEmojiLikeEventArgs e)
+        {
+            if (OnGroupMsgEmojiLike == null)
+            {
+                return;
+            }
+
+            await OnGroupMsgEmojiLike.Invoke(sender, e);
+        }
+
         public event EventHandlerAsync<GroupLuckyKingEventArgs>? OnGroupLuckyKing;
 
 		async Task IBotContext.InvokeOnGroupLuckyKing(object sender, GroupLuckyKingEventArgs e)

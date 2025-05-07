@@ -121,6 +121,13 @@ namespace Makabaka
         internal Task InvokeOnGroupEssenceChange(object sender, GroupEssenceChangeEventArgs e);
 
         /// <summary>
+        /// 当群消息表情点赞事件发生时触发
+        /// </summary>
+        event EventHandlerAsync<GroupMsgEmojiLikeEventArgs>? OnGroupMsgEmojiLike;
+
+        internal Task InvokeOnGroupMsgEmojiLike(object sender, GroupMsgEmojiLikeEventArgs e);
+
+        /// <summary>
         /// 当群红包运气王事件发生时触发
         /// </summary>
         event EventHandlerAsync<GroupLuckyKingEventArgs>? OnGroupLuckyKing;

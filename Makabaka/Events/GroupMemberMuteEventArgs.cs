@@ -26,8 +26,9 @@
 		public ulong UserId { get; set; }
 
 		/// <summary>
-		/// 禁言时长，单位秒
+		/// 禁言时长，单位秒、
+		/// -1 表示永久禁言
 		/// </summary>
-		public ulong Duration { get; set; }
+		public long Duration { get; set; }
 	}
 }
